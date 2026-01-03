@@ -27,18 +27,18 @@
         </nav>
     </header>
 
-   <section class="search-and-filter">
+    <section class="search-and-filter">
         <h2>Find Your Next Film</h2>
-        <form class="search-form" onsubmit="return false;">
-            <input type="text" id="searchInput" class="search-input" placeholder="Search by title...">
-        </form>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="searchInput" placeholder="Search for titles..." onkeyup="searchMovies()">
+        </div>
     </section>
-<div class="search-container">
-    <i class="fas fa-search search-icon"></i>
-    <input type="text" id="searchInput" placeholder="Search for titles..." onkeyup="searchMovies()">
-</div> <div class="user-notice">
-    <p>💡 <b>Pro Tip:</b> To support the site, our links may show ads. If a new tab pops up, simply <b>close it</b> and return here to continue your download! 🔥</p>
-</div>
+
+    <div class="user-notice">
+        <p>💡 <b>Pro Tip:</b> To support the site, our links may show ads. If a new tab pops up, simply <b>close it</b> and return here to continue your download! 🔥</p>
+    </div>
+
     <section class="telegram-promo">
         <div class="promo-box">
             <h3>Join Our Community</h3>
@@ -53,15 +53,17 @@
         <section class="content-grid" id="movie-display"></section>
         <div id="pagination-nav" class="pagination-container"></div>
     </main>
+
     <section class="request-section">
-    <div class="request-content">
-        <h3>Missing a Movie?</h3>
-        <p>Tell us what you want to watch, and we will upload it for you!</p>
-        <a href="https://t.me/maestrotv_official" class="request-btn">
-            <i class="fas fa-plus-circle"></i> Request a Movie
-        </a>
-    </div>
-</section>
+        <div class="request-content">
+            <h3>Missing a Movie?</h3>
+            <p>Tell us what you want to watch, and we will upload it for you!</p>
+            <a href="https://t.me/maestrotv_official" class="request-btn">
+                <i class="fas fa-plus-circle"></i> Request a Movie
+            </a>
+        </div>
+    </section>
+
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
@@ -79,6 +81,15 @@
             <p>&copy; 2026 MaestroTV. All rights reserved.</p>
         </div>
     </footer>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="video-container">
+                <iframe id="videoPlayer" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
