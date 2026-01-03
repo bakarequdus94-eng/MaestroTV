@@ -6,6 +6,8 @@ const moviesPerPage = 12;
 async function initSite() {
     try {
         const response = await fetch('./data.json');
+        if (!response.ok) throw new Error("Could not find data.json");
+        
         allMovies = await response.json();
         filteredMovies = allMovies;
         renderGallery();
@@ -23,6 +25,7 @@ async function initSite() {
         }
     } catch (err) {
         console.error("Failed to load movies:", err);
+        document.getElementById('movie-display').innerHTML = `<h3 style="color:red; text-align:center; grid-column:1/-1;">Error loading database. Check console.</h3>`;
     }
 }
 
@@ -41,28 +44,29 @@ function renderGallery() {
         grid.innerHTML = `<h3 style="color:white; text-align:center; grid-column:1/-1;">No results found.</h3>`;
     }
 
- currentItems.forEach(movie => {
-    // Check if the rating is 9.0 or higher
-    const isTrending = parseFloat(movie.rating) >= 9.0;
-    // If it is trending, we add the 'trending-card' class
-    const cardClass = isTrending ? 'movie-card trending-card' : 'movie-card';
+    currentItems.forEach(movie => {
+        const isTrending = parseFloat(movie.rating) >= 9.0;
+        const cardClass = isTrending ? 'movie-card trending-card' : 'movie-card';
 
-    grid.innerHTML += `
-        <div class="${cardClass}">
-            <div class="poster-container">
-                ${isTrending ? '<span class="trending-tag">🔥 Trending</span>' : ''}
-                <span class="genre-tag">${movie.genre.split(',')[0]}</span>
-                <span class="rating-badge">⭐ ${movie.rating || '8.5'}</span>
-                <span class="size-badge">${movie.size || 'N/A'}</span>
-                <img src="${movie.poster_src}" alt="${movie.title}">
-            </div>
-            <div class="card-info">
-                <h3 class="film-title">${movie.title}</h3>
-                <p>${movie.year} | ${movie.quality}</p>
-                <a href="${movie.download_url}" class="download-btn" target="_blank">Download</a>
-            </div>
-        </div>`;
-});
+        grid.innerHTML += `
+            <div class="${cardClass}">
+                <div class="poster-container">
+                    ${isTrending ? '<span class="trending-tag">🔥 Trending</span>' : ''}
+                    <span class="genre-tag">${movie.genre.split(',')[0]}</span>
+                    <span class="rating-badge">⭐ ${movie.rating || '8.5'}</span>
+                    <span class="size-badge">${movie.size || 'N/A'}</span>
+                    <img src="${movie.poster_src}" alt="${movie.title}">
+                </div>
+                <div class="card-info">
+                    <h3 class="film-title">${movie.title}</h3>
+                    <p>${movie.year} | ${movie.quality}</p>
+                    <div class="button-group" style="display:flex; gap:10px;">
+                        <a href="${movie.download_url}" class="download-btn" target="_blank" style="flex:1;">Download</a>
+                        ${movie.stream_url ? `<button onclick="watchMovie('${movie.stream_url}')" class="watch-btn" style="flex:1; background:#e50914; color:white; border:none; border-radius:4px; cursor:pointer;">Watch</button>` : ''}
+                    </div>
+                </div>
+            </div>`;
+    });
 
     renderPagination(nav);
 }
@@ -70,7 +74,6 @@ function renderGallery() {
 function renderPagination(navElement) {
     const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
     navElement.innerHTML = '';
-    
     if (totalPages <= 1) return;
 
     for (let i = 1; i <= totalPages; i++) {
@@ -86,7 +89,7 @@ function renderPagination(navElement) {
     }
 }
 
-// Filter functions
+// Global Filter functions
 window.filterByType = (type) => {
     filteredMovies = allMovies.filter(m => m.type === type);
     currentPage = 1;
@@ -105,4 +108,27 @@ window.resetFilters = () => {
     currentPage = 1;
     renderGallery();
 };
+
+// Modal Functions
+window.watchMovie = function(url) {
+    const modal = document.getElementById("videoModal");
+    const player = document.getElementById("videoPlayer");
+    // Converts Doodstream download link to embed link automatically
+    const embedUrl = url.replace('/d/', '/e/');
+    player.src = embedUrl;
+    modal.style.display = "block";
+}
+
+// Close Modal logic
+document.addEventListener('DOMContentLoaded', () => {
+    const closeBtn = document.querySelector(".close-modal");
+    if(closeBtn) {
+        closeBtn.onclick = function() {
+            document.getElementById("videoModal").style.display = "none";
+            document.getElementById("videoPlayer").src = ""; 
+        }
+    }
+});
+
+// Start the site
 initSite();
