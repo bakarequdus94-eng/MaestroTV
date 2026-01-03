@@ -499,3 +499,58 @@ footer {
     z-index: 5;
     text-transform: uppercase;
 }
+/* Container to center the search bar */
+.search-and-filter {
+    padding: 40px 20px;
+    text-align: center;
+    background: linear-gradient(to bottom, #141414, #1a1a1a);
+}
+
+.search-and-filter h2 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* The Search Box Styling */
+.search-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-icon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 18px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 15px 20px 15px 50px; /* Space for the icon */
+    background: #222;
+    border: 2px solid #333;
+    border-radius: 50px; /* Rounded pill shape */
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Glow effect when you click to type */
+#searchInput:focus {
+    border-color: #e50914; /* Your brand red */
+    background: #2b2b2b;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+}
+
+/* Placeholder text color */
+#searchInput::placeholder {
+    color: #777;
+}
