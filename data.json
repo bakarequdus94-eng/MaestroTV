@@ -9,24 +9,35 @@
   "download_url":  "https://t.me/maestrotv_official", 
   "type": "movie" 
 },
-  { 
-    "title": "28 Years Later", 
-    "year": "2026", 
-    "quality": "HDRip", 
-    "genre": "Horror", 
-    "size": "1.4 GB", 
-    "poster_src": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/966y24xYtTz5uG8EwA2NnLpU39W.jpg", 
-    "download_url": "https://t.me/maestrotv_official", 
-    "type": "movie" 
-  },
-  { 
-    "title": "Superman", 
-    "year": "2025", 
-    "quality": "BluRay", 
-    "genre": "Action", 
-    "size": "2.1 GB", 
-    "poster_src": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/39f0zS7DAnvGq6K9mF9mYt6X8L3.jpg", 
-    "download_url": "https://t.me/maestrotv_official", 
-    "type": "movie" 
-  }
+{ 
+  "title": "Bāhubali: The Epic", 
+  "year": "2025", 
+  "quality": "IMAX 4K", 
+  "genre": "Action, Drama", 
+  "size": "2.4 GB", 
+  "poster_src": "https://media.themoviedb.org/t/p/w300_and_h450_face/4sLSorDKKDN944kWngxgQlpdDeg.jpg", 
+  "download_url": "YOUR_DOWNLOADWELLA_LINK", 
+  "type": "movie" 
+},
+ { 
+  "title": "Superman", 
+  "year": "2025", 
+  "quality": "4K UHD", 
+  "genre": "Action, Adventure", 
+  "size": "2.1 GB", 
+  "poster_src": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/39f0zS7DAnvGq6K9mF9mYt6X8L3.jpg", 
+  "download_url": "YOUR_DOWNLOADWELLA_LINK", 
+  "type": "movie" 
+},
+{ 
+  "title": "28 Years Later", 
+  "year": "2025", 
+  "quality": "HDRip", 
+  "genre": "Horror, Sci-Fi", 
+  "size": "1.4 GB", 
+  "poster_src": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/966y24xYtTz5uG8EwA2NnLpU39W.jpg", 
+  "download_url": "YOUR_DOWNLOADWELLA_LINK", 
+  "type": "movie" 
+},
 ]
+  
