@@ -1,15 +1,30 @@
-[
-  { "title": "Action Movie 1", "year": "2024", "quality": "HD", "genre": "Action", "size": "230 MB", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "movie" },
-  { "title": "Drama Series 1", "year": "2023", "quality": "720p", "genre": "Drama", "size": "N/A", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "series" },
-  { "title": "Sci-Fi Adventure", "year": "2025", "quality": "4K", "genre": "Sci-Fi", "size": "1.2 GB", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "movie" },
-  { "title": "Horror Night", "year": "2024", "quality": "HD", "genre": "Horror", "size": "800 MB", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "movie" },
-  { "title": "Comedy Gold", "year": "2022", "quality": "HD", "genre": "Comedy", "size": "N/A", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "series" },
-  { "title": "Thriller Season", "year": "2023", "quality": "1080p", "genre": "Thriller", "size": "500 MB", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "series" },
-  { "title": "Animation Land", "year": "2024", "quality": "HD", "genre": "Animation", "size": "400 MB", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "movie" },
-  { "title": "The Mystery", "year": "2021", "quality": "720p", "genre": "Mystery", "size": "N/A", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "series" },
-  { "title": "Epic War", "year": "2025", "quality": "4K", "genre": "Action", "size": "2.5 GB", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "movie" },
-  { "title": "Romance Tales", "year": "2023", "quality": "HD", "genre": "Romance", "size": "N/A", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "series" },
-  { "title": "Space Journey", "year": "2024", "quality": "1080p", "genre": "Sci-Fi", "size": "1.1 GB", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "movie" },
-  { "title": "Urban Legend", "year": "2022", "quality": "HD", "genre": "Horror", "size": "900 MB", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "movie" },
-  { "title": "Pagination Trigger", "year": "2026", "quality": "HD", "genre": "Action", "size": "100 MB", "poster_src": "https://via.placeholder.com/300x450", "download_url": "https://t.me/maestrotv_official", "type": "movie" }
-]
+{ 
+  "title": "Greenland 2: Migration", 
+  "year": "2026", 
+  "quality": "4K UHD", 
+  "genre": "Action, Thriller", 
+  "size": "1.8 GB", 
+  "poster_src": "https://image.tmdb.org/t/p/w500/v9Y9HqbS89SSTp6vC8pS7TID76.jpg", 
+  "download_url": "YOUR_DOWNLOADWELLA_LINK_HERE", 
+  "type": "movie" 
+},
+{ 
+  "title": "28 Years Later: The Bone Temple", 
+  "year": "2026", 
+  "quality": "HDRip", 
+  "genre": "Horror, Sci-Fi", 
+  "size": "1.4 GB", 
+  "poster_src": "https://image.tmdb.org/t/p/w500/966y24xYtTz5uG8EwA2NnLpU39W.jpg", 
+  "download_url": "YOUR_DOWNLOADWELLA_LINK_HERE", 
+  "type": "movie" 
+},
+{ 
+  "title": "Superman", 
+  "year": "2025", 
+  "quality": "BluRay", 
+  "genre": "Action, Adventure", 
+  "size": "2.1 GB", 
+  "poster_src": "https://image.tmdb.org/t/p/w500/39f0zS7DAnvGq6K9mF9mYt6X8L3.jpg", 
+  "download_url": "YOUR_DOWNLOADWELLA_LINK_HERE", 
+  "type": "movie" 
+}
