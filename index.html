@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaestroTV - Download Films & Series</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1 onclick="resetFilters()" style="cursor: pointer;">MaestroTV</h1>
+        <nav>
+            <a href="#" onclick="resetFilters()">Home</a>
+            <a href="#" onclick="filterByType('movie')">Movies</a>
+            <a href="#" onclick="filterByType('series')">Series</a>
+            <div class="dropdown">
+                <button class="dropbtn">Genres</button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="filterByGenre('Action')">Action</a>
+                    <a href="#" onclick="filterByGenre('Sci-Fi')">Sci-Fi</a>
+                    <a href="#" onclick="filterByGenre('Horror')">Horror</a>
+                    <a href="#" onclick="filterByGenre('Comedy')">Comedy</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+   <section class="search-and-filter">
+        <h2>Find Your Next Film</h2>
+        <form class="search-form" onsubmit="return false;">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search by title...">
+        </form>
+    </section>
+
+    <section class="telegram-promo">
+        <div class="promo-box">
+            <h3>Join Our Community</h3>
+            <p>Get instant updates on the latest uploads!</p>
+            <a href="https://t.me/maestrotv_official" class="social-btn telegram" target="_blank">
+                <i class="fab fa-telegram-plane"></i> Join MaestroTV Telegram
+            </a>
+        </div>
+    </section>
+
+    <main>
+        <section class="content-grid" id="movie-display"></section>
+        <div id="pagination-nav" class="pagination-container"></div>
+    </main>
+    <section class="request-section">
+    <div class="request-content">
+        <h3>Missing a Movie?</h3>
+        <p>Tell us what you want to watch, and we will upload it for you!</p>
+        <a href="https://t.me/maestrotv_official" class="request-btn">
+            <i class="fas fa-plus-circle"></i> Request a Movie
+        </a>
+    </div>
+</section>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>Maestro<span>TV</span></h2>
+                <p>Your number one source for the latest films.</p>
+            </div>
+            <div class="footer-links">
+                <h3>Join Our Community</h3>
+                <a href="https://t.me/maestrotv_official" id="telegram-link" class="social-btn telegram" target="_blank">
+                    <i class="fab fa-telegram-plane"></i> Join Telegram Channel
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MaestroTV. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

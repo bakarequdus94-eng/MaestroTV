@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download Movie - MaestroTV</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header><h1>MaestroTV</h1><a href="index.html" style="color:white">Back to Home</a></header>
+
+    <main style="padding: 50px; text-align: center;">
+        <div id="movie-details">
+            <p>Loading movie details...</p>
+        </div>
+    </main>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieId = urlParams.get('id');
+
+        fetch('data.json')
+            .then(res => res.json())
+            .then(data => {
+                const movie = data.find(m => m.id == movieId);
+                if (movie) {
+                    document.getElementById('movie-details').innerHTML = `
+                        <img src="${movie.poster_src}" style="width:300px; border-radius:10px;">
+                        <h2 style="font-size:2.5rem;">${movie.title} (${movie.year})</h2>
+                        <p>Genre: ${movie.genre} | Quality: ${movie.quality}</p>
+                        <br>
+                        <a href="${movie.download_url}" class="download-btn" style="padding:20px 40px; font-size:1.5rem;">
+                           DOWNLOAD NOW
+                        </a>
+                    `;
+                }
+            });
+    </script>
+</body>
+</html>
