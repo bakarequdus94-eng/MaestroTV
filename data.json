@@ -1,30 +1,32 @@
-[{ 
-  "title": "Greenland 2: Migration", 
-  "year": "2026", 
-  "quality": "4K UHD", 
-  "genre": "Action, Thriller", 
-  "size": "1.8 GB", 
-  "poster_src": "https://image.tmdb.org/t/p/w500/v9Y9HqbS89SSTp6vC8pS7TID76.jpg", 
-  "download_url": "YOUR_DOWNLOADWELLA_LINK_HERE", 
-  "type": "movie" 
-},
-{ 
-  "title": "28 Years Later: The Bone Temple", 
-  "year": "2026", 
-  "quality": "HDRip", 
-  "genre": "Horror, Sci-Fi", 
-  "size": "1.4 GB", 
-  "poster_src": "https://image.tmdb.org/t/p/w500/966y24xYtTz5uG8EwA2NnLpU39W.jpg", 
-  "download_url": "YOUR_DOWNLOADWELLA_LINK_HERE", 
-  "type": "movie" 
-},
-{ 
-  "title": "Superman", 
-  "year": "2025", 
-  "quality": "BluRay", 
-  "genre": "Action, Adventure", 
-  "size": "2.1 GB", 
-  "poster_src": "https://image.tmdb.org/t/p/w500/39f0zS7DAnvGq6K9mF9mYt6X8L3.jpg", 
-  "download_url": "YOUR_DOWNLOADWELLA_LINK_HERE", 
-  "type": "movie" 
-}]
+[
+  { 
+    "title": "Greenland 2: Migration", 
+    "year": "2026", 
+    "quality": "4K UHD", 
+    "genre": "Action", 
+    "size": "1.8 GB", 
+    "poster_src": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/v9Y9HqbS89SSTp6vC8pS7TID76.jpg", 
+    "download_url": "https://t.me/maestrotv_official", 
+    "type": "movie" 
+  },
+  { 
+    "title": "28 Years Later", 
+    "year": "2026", 
+    "quality": "HDRip", 
+    "genre": "Horror", 
+    "size": "1.4 GB", 
+    "poster_src": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/966y24xYtTz5uG8EwA2NnLpU39W.jpg", 
+    "download_url": "https://t.me/maestrotv_official", 
+    "type": "movie" 
+  },
+  { 
+    "title": "Superman", 
+    "year": "2025", 
+    "quality": "BluRay", 
+    "genre": "Action", 
+    "size": "2.1 GB", 
+    "poster_src": "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/39f0zS7DAnvGq6K9mF9mYt6X8L3.jpg", 
+    "download_url": "https://t.me/maestrotv_official", 
+    "type": "movie" 
+  }
+]
