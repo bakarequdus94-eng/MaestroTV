@@ -20,7 +20,6 @@
     "size": "1.6 GB", 
     "poster_src": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/v8I9t8S88SSTp6vC8pS7TID76.jpg", 
     "download_url": "https://t.me/maestrotv_official",
-    "stream_url":"", 
     "type": "movie" 
   },
   { 
@@ -32,7 +31,6 @@
     "size": "2.4 GB", 
     "poster_src": "https://www.themoviedb.org/t/p/w600_and_h900_face/cf7hE1ifY4UNbS25tGnaTyyDrI2.jpg", 
     "download_url": "https://t.me/maestrotv_official",
-    "stream_url": "",
     "type": "movie" 
   },
   { 
@@ -44,7 +42,6 @@
     "size": "2.1 GB", 
     "poster_src": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/vB8oYpS6996SSTp6vC8pS7TID76.jpg", 
     "download_url": "https://t.me/maestrotv_official",
-    "stream_url": "",
     "type": "movie" 
   },
   { 
@@ -56,7 +53,6 @@
     "size": "1.4 GB", 
     "poster_src": "https://image.tmdb.org/t/p/w500/7WsyChv6670868fDVYp8pI8S7.jpg", 
     "download_url": "https://t.me/maestrotv_official",
-    "stream_url": "",
     "type": "movie" 
   }
 ]
