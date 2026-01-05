@@ -6,7 +6,7 @@
   "genre": "Superhero, Action, Comedy", 
   "rating": "9.2",
   "size": "122.1 MB", 
-  "poster_src": "https://postercdn.net/snaps/aa0d2and8v2z4cuu.jpg", 
+  "poster_src": "https://image.tmdb.org/t/p/w500/v8I9t8S88SSTp6vC8pS7TID76.jpg", 
   "download_url": "https://myvidplay.com/d/hqj4k3oh65zi",
   "stream_url": "https://myvidplay.com/e/hqj4k3oh65zi",
   "type": "series" 
@@ -20,7 +20,7 @@
     "size": "1.6 GB", 
     "poster_src": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/v8I9t8S88SSTp6vC8pS7TID76.jpg", 
     "download_url": "https://t.me/maestrotv_official",
-    "stream_url": "https://doodstream.com/d/example1", 
+    "stream_url": 
     "type": "movie" 
   },
   { 
@@ -30,7 +30,7 @@
     "genre": "Action, Drama", 
     "rating": "9.2",
     "size": "2.4 GB", 
-    "poster_src": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/4sLSorDKKDN944kWngxgQlpdDeg.jpg", 
+    "poster_src": "https://www.themoviedb.org/t/p/w600_and_h900_face/cf7hE1ifY4UNbS25tGnaTyyDrI2.jpg", 
     "download_url": "https://t.me/maestrotv_official",
     "stream_url": "https://doodstream.com/d/example2",
     "type": "movie" 
@@ -54,7 +54,7 @@
     "genre": "Horror, Sci-Fi", 
     "rating": "9.0",
     "size": "1.4 GB", 
-    "poster_src": "https://media.themoviedb.org/t/p/w600_and_h900_bestv2/966y24xYtTz5uG8EwA2NnLpU39W.jpg", 
+    "poster_src": "https://image.tmdb.org/t/p/w500/7WsyChv6670868fDVYp8pI8S7.jpg", 
     "download_url": "https://t.me/maestrotv_official",
     "stream_url": "https://doodstream.com/d/example4",
     "type": "movie" 
