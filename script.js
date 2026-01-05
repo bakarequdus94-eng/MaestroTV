@@ -4,41 +4,32 @@ let filteredMovies = [];
 let currentPage = 1;
 const moviesPerPage = 12;
 
-// --- 2. Initialize Site (REPLACE YOUR OLD ONE WITH THIS) ---
+// --- 2. Initialize Site ---
 async function initSite() {
     const grid = document.getElementById('movie-display');
     if (!grid) return;
 
     try {
-        // Try to fetch the data
         const response = await fetch('./data.json');
-        
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         
         const data = await response.json();
         allMovies = data;
         filteredMovies = data;
         
-        renderGallery(); // Start showing the movies
+        renderGallery();
         console.log("Database loaded successfully!");
 
     } catch (err) {
         console.error("JSON Error:", err);
-        // This shows the error directly on your website so you can see it on mobile
-        grid.innerHTML = `
-            <div style="color:white; text-align:center; padding:50px; grid-column: 1/-1;">
-                <h2 style="color:#e50914;">Database Connection Error</h2>
-                <p>There is a typo in your data.json file.</p>
-                <code style="background:#333; padding:10px; display:block; margin-top:10px;">
-                    ${err.message}
-                </code>
-            </div>`;
+        grid.innerHTML = `<div style="color:white;text-align:center;padding:50px;grid-column:1/-1;">
+            <h2 style="color:#e50914;">Database Error</h2>
+            <p>${err.message}</p>
+        </div>`;
     }
 }
 
-// --- 3. Render Gallery (Keep this as is) ---
+// --- 3. Render Gallery ---
 function renderGallery() {
     const grid = document.getElementById('movie-display');
     if (!grid) return;
@@ -49,8 +40,12 @@ function renderGallery() {
     const currentItems = filteredMovies.slice(start, end);
 
     currentItems.forEach(movie => {
+        // We use encodeURIComponent to prevent titles with quotes from breaking the buttons
+        const safeStreamUrl = encodeURIComponent(movie.stream_url || "");
+        const safeDownloadUrl = encodeURIComponent(movie.download_url || "");
+
         const watchButton = (movie.stream_url && movie.stream_url.trim() !== "") 
-            ? `<button onclick="watchMovie('${movie.stream_url}')" class="watch-btn" style="flex:1; background:#e50914; color:white; border:none; border-radius:4px; cursor:pointer; height:40px;">Watch</button>` 
+            ? `<button onclick="watchMovie(decodeURIComponent('${safeStreamUrl}'))" class="watch-btn">Watch</button>` 
             : '';
 
         grid.innerHTML += `
@@ -62,7 +57,7 @@ function renderGallery() {
                     <h3 class="film-title">${movie.title}</h3>
                     <p>${movie.year} | ${movie.quality}</p>
                     <div class="button-group" style="display:flex; gap:10px; margin-top:10px;">
-                        <button onclick="handleDownload('${movie.download_url}')" class="download-btn" style="flex:1; height:40px; background:#2ecc71; color:white; border:none; border-radius:4px; cursor:pointer;">Download</button>
+                        <button onclick="handleDownload(decodeURIComponent('${safeDownloadUrl}'))" class="download-btn">Download</button>
                         ${watchButton}
                     </div>
                 </div>
@@ -72,9 +67,15 @@ function renderGallery() {
 
 // --- 4. Global Handlers ---
 window.handleDownload = function(url) {
-    const adsterraLink = "https://your-adsterra-smartlink.com"; // Add your link here
+    const adsterraLink = "https://your-adsterra-smartlink.com"; // <-- PUT YOUR ACTUAL LINK HERE
+    
+    // 1. Open Adsterra in a new tab
     window.open(adsterraLink, '_blank');
-    window.location.href = url;
+    
+    // 2. Wait 500ms before starting the movie download to ensure the ad registers
+    setTimeout(() => {
+        window.location.href = url;
+    }, 500);
 };
 
 window.watchMovie = function(url) {
@@ -82,9 +83,19 @@ window.watchMovie = function(url) {
     const player = document.getElementById("videoPlayer");
     if(modal && player) {
         player.src = url;
-        modal.style.display = "block";
+        modal.style.display = "flex"; // Changed to flex for centering
     }
 };
 
-// --- 5. Run the script ---
+// Function to close the modal
+window.closeModal = function() {
+    const modal = document.getElementById("videoModal");
+    const player = document.getElementById("videoPlayer");
+    if(modal && player) {
+        modal.style.display = "none";
+        player.src = ""; // Stops the video sound when closed
+    }
+}
+
+// --- 5. Run ---
 initSite();
