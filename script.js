@@ -29,7 +29,7 @@ async function initSite() {
     }
 }
 
-// --- 3. Render Gallery ---
+// --- 3. Render Gallery (Updated to show Genre) ---
 function renderGallery() {
     const grid = document.getElementById('movie-display');
     if (!grid) return;
@@ -40,12 +40,11 @@ function renderGallery() {
     const currentItems = filteredMovies.slice(start, end);
 
     currentItems.forEach(movie => {
-        // We use encodeURIComponent to prevent titles with quotes from breaking the buttons
-        const safeStreamUrl = encodeURIComponent(movie.stream_url || "");
-        const safeDownloadUrl = encodeURIComponent(movie.download_url || "");
+        // We create a variable for genre. If it's missing in JSON, we show "N/A"
+        const genreText = movie.genre ? movie.genre : "General";
 
         const watchButton = (movie.stream_url && movie.stream_url.trim() !== "") 
-            ? `<button onclick="watchMovie(decodeURIComponent('${safeStreamUrl}'))" class="watch-btn">Watch</button>` 
+            ? `<button onclick="watchMovie('${movie.stream_url}')" class="watch-btn" style="flex:1; background:#e50914; color:white; border:none; border-radius:4px; cursor:pointer; height:40px;">Watch</button>` 
             : '';
 
         grid.innerHTML += `
@@ -55,9 +54,11 @@ function renderGallery() {
                 </div>
                 <div class="card-info">
                     <h3 class="film-title">${movie.title}</h3>
-                    <p>${movie.year} | ${movie.quality}</p>
+                    <p style="color: #e50914; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">${genreText}</p>
+                    <p>${movie.year} | ${movie.quality} | ${movie.size}</p>
+                    
                     <div class="button-group" style="display:flex; gap:10px; margin-top:10px;">
-                        <button onclick="handleDownload(decodeURIComponent('${safeDownloadUrl}'))" class="download-btn">Download</button>
+                        <button onclick="handleDownload('${movie.download_url}')" class="download-btn" style="flex:1; height:40px; background:#2ecc71; color:white; border:none; border-radius:4px; cursor:pointer;">Download</button>
                         ${watchButton}
                     </div>
                 </div>
