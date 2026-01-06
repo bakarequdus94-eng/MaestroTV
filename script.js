@@ -18,7 +18,8 @@ async function initSite() {
         filteredMovies = data;
         
         renderGallery();
-        console.log("Database loaded successfully!");
+        setupSearch(); // <--- THIS WAS MISSING: It turns on the search bar
+        console.log("Database and Search loaded successfully!");
 
     } catch (err) {
         console.error("JSON Error:", err);
@@ -29,7 +30,7 @@ async function initSite() {
     }
 }
 
-// --- 3. Render Gallery (Updated to show Genre) ---
+// --- 3. Render Gallery ---
 function renderGallery() {
     const grid = document.getElementById('movie-display');
     if (!grid) return;
@@ -39,25 +40,26 @@ function renderGallery() {
     const end = start + moviesPerPage;
     const currentItems = filteredMovies.slice(start, end);
 
-    currentItems.forEach(movie => {
-        // We create a variable for genre. If it's missing in JSON, we show "N/A"
-        const genreText = movie.genre ? movie.genre : "General";
+    if (currentItems.length === 0) {
+        grid.innerHTML = `<p style="color:white; text-align:center; grid-column:1/-1; padding:50px;">No movies found matches your search.</p>`;
+        return;
+    }
 
+    currentItems.forEach(movie => {
+        const genreText = movie.genre ? movie.genre : "General";
         const watchButton = (movie.stream_url && movie.stream_url.trim() !== "") 
             ? `<button onclick="watchMovie('${movie.stream_url}')" class="watch-btn" style="flex:1; background:#e50914; color:white; border:none; border-radius:4px; cursor:pointer; height:40px;">Watch</button>` 
             : '';
 
-        // Inside your renderGallery function, update the image part:
-grid.innerHTML += `
-    <div class="movie-card">
-        <div class="poster-container" onclick="window.open('https://www.effectivegatecpm.com/tgw846gbj?key=0d9de288386fc98fe8a13ae0823e76a4', '_blank')">
-            <img src="${movie.poster_src}" alt="${movie.title}" style="cursor:pointer;">
-        </div>
+        grid.innerHTML += `
+            <div class="movie-card">
+                <div class="poster-container" onclick="window.open('https://www.effectivegatecpm.com/tgw846gbj?key=0d9de288386fc98fe8a13ae0823e76a4', '_blank')">
+                    <img src="${movie.poster_src}" alt="${movie.title}" style="cursor:pointer;" onerror="this.src='https://via.placeholder.com/300x450?text=No+Poster'">
+                </div>
                 <div class="card-info">
                     <h3 class="film-title">${movie.title}</h3>
                     <p style="color: #e50914; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">${genreText}</p>
                     <p>${movie.year} | ${movie.quality} | ${movie.size}</p>
-                    
                     <div class="button-group" style="display:flex; gap:10px; margin-top:10px;">
                         <button onclick="handleDownload('${movie.download_url}')" class="download-btn" style="flex:1; height:40px; background:#2ecc71; color:white; border:none; border-radius:4px; cursor:pointer;">Download</button>
                         ${watchButton}
@@ -67,17 +69,30 @@ grid.innerHTML += `
     });
 }
 
-// --- 4. Global Handlers ---
+// --- 4. Search Logic (NEW) ---
+function setupSearch() {
+    // Make sure your HTML input has id="searchInput" or change this selector
+    const searchInput = document.getElementById('searchInput') || document.querySelector('input[type="text"]');
+    
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase().trim();
+            
+            filteredMovies = allMovies.filter(movie => 
+                movie.title.toLowerCase().includes(term)
+            );
+            
+            currentPage = 1; 
+            renderGallery();
+        });
+    }
+}
+
+// --- 5. Global Handlers ---
 window.handleDownload = function(url) {
-    const adsterraLink = "https://www.effectivegatecpm.com/tgw846gbj?key=0d9de288386fc98fe8a13ae0823e76a4"; // <-- PUT YOUR ACTUAL LINK HERE
-    
-    // 1. Open Adsterra in a new tab
+    const adsterraLink = "https://www.effectivegatecpm.com/tgw846gbj?key=0d9de288386fc98fe8a13ae0823e76a4"; 
     window.open(adsterraLink, '_blank');
-    
-    // 2. Wait 500ms before starting the movie download to ensure the ad registers
-    setTimeout(() => {
-        window.location.href = url;
-    }, 500);
+    setTimeout(() => { window.location.href = url; }, 500);
 };
 
 window.watchMovie = function(url) {
@@ -85,35 +100,30 @@ window.watchMovie = function(url) {
     const player = document.getElementById("videoPlayer");
     if(modal && player) {
         player.src = url;
-        modal.style.display = "flex"; // Changed to flex for centering
+        modal.style.display = "flex";
     }
 };
 
-// Function to close the modal
 window.closeModal = function() {
     const modal = document.getElementById("videoModal");
     const player = document.getElementById("videoPlayer");
     if(modal && player) {
         modal.style.display = "none";
-        player.src = ""; // Stops the video sound when closed
+        player.src = "";
     }
 }
+
 window.filterByGenre = function(genreName) {
     if (genreName === 'All') {
         filteredMovies = allMovies;
     } else {
-        // This looks inside the "genre" string in your JSON
         filteredMovies = allMovies.filter(movie => 
             movie.genre && movie.genre.includes(genreName)
         );
     }
-    
-    currentPage = 1; // Reset to page 1
-    renderGallery(); // Redraw the movies on the screen
-    
-    // Optional: Close the dropdown after clicking (for mobile)
-    console.log("Filtering by:", genreName);
+    currentPage = 1;
+    renderGallery();
 };
 
-// --- 5. Run ---
+// --- 6. Run ---
 initSite();
