@@ -97,6 +97,22 @@ window.closeModal = function() {
         player.src = ""; // Stops the video sound when closed
     }
 }
+window.filterByGenre = function(genreName) {
+    if (genreName === 'All') {
+        filteredMovies = allMovies;
+    } else {
+        // This looks inside the "genre" string in your JSON
+        filteredMovies = allMovies.filter(movie => 
+            movie.genre && movie.genre.includes(genreName)
+        );
+    }
+    
+    currentPage = 1; // Reset to page 1
+    renderGallery(); // Redraw the movies on the screen
+    
+    // Optional: Close the dropdown after clicking (for mobile)
+    console.log("Filtering by:", genreName);
+};
 
 // --- 5. Run ---
 initSite();
