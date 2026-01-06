@@ -68,7 +68,7 @@ function renderGallery() {
 
 // --- 4. Global Handlers ---
 window.handleDownload = function(url) {
-    const adsterraLink = "https://your-adsterra-smartlink.com"; // <-- PUT YOUR ACTUAL LINK HERE
+    const adsterraLink = "https://www.effectivegatecpm.com/tgw846gbj?key=0d9de288386fc98fe8a13ae0823e76a4"; // <-- PUT YOUR ACTUAL LINK HERE
     
     // 1. Open Adsterra in a new tab
     window.open(adsterraLink, '_blank');
