@@ -47,11 +47,12 @@ function renderGallery() {
             ? `<button onclick="watchMovie('${movie.stream_url}')" class="watch-btn" style="flex:1; background:#e50914; color:white; border:none; border-radius:4px; cursor:pointer; height:40px;">Watch</button>` 
             : '';
 
-        grid.innerHTML += `
-            <div class="movie-card">
-                <div class="poster-container">
-                    <img src="${movie.poster_src}" alt="${movie.title}" onerror="this.src='https://via.placeholder.com/300x450?text=No+Poster'">
-                </div>
+        // Inside your renderGallery function, update the image part:
+grid.innerHTML += `
+    <div class="movie-card">
+        <div class="poster-container" onclick="window.open('https://www.effectivegatecpm.com/tgw846gbj?key=0d9de288386fc98fe8a13ae0823e76a4', '_blank')">
+            <img src="${movie.poster_src}" alt="${movie.title}" style="cursor:pointer;">
+        </div>
                 <div class="card-info">
                     <h3 class="film-title">${movie.title}</h3>
                     <p style="color: #e50914; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px;">${genreText}</p>
