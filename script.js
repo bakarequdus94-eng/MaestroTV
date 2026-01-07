@@ -33,12 +33,27 @@ async function initSite() {
 // --- 3. Render Gallery ---
 function renderGallery() {
     const grid = document.getElementById('movie-display');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const pageDisplay = document.getElementById('pageNumber');
+    
     if (!grid) return;
     grid.innerHTML = '';
+
+    // Calculate total pages
+    const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
+
+    // Update Pagination UI
+    if (pageDisplay) pageDisplay.innerText = `Page ${currentPage} of ${totalPages || 1}`;
+    if (prevBtn) prevBtn.disabled = (currentPage === 1);
+    if (nextBtn) nextBtn.disabled = (currentPage >= totalPages);
 
     const start = (currentPage - 1) * moviesPerPage;
     const end = start + moviesPerPage;
     const currentItems = filteredMovies.slice(start, end);
+
+    // ... (rest of your existing forEach loop code goes here)
+}
 
     if (currentItems.length === 0) {
         grid.innerHTML = `<p style="color:white; text-align:center; grid-column:1/-1; padding:50px;">No movies found matches your search.</p>`;
@@ -151,4 +166,18 @@ window.closeModal = function() {
         // Re-enable scrolling
         document.body.style.overflow = "auto"; 
     }
+};
+window.changePage = function(direction) {
+    const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
+    
+    currentPage += direction;
+
+    // Safety checks
+    if (currentPage < 1) currentPage = 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+
+    renderGallery();
+    
+    // Scroll back to top so user sees the new movies
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 };
