@@ -1,3 +1,8 @@
+/**
+ * MAESTRO TV - FINAL MASTER SCRIPT (JAN 2026)
+ * Features: Search, Pagination, Genre Filtering, Adsterra Integration, Full-screen Watch Modal
+ */
+
 // --- 1. Global Variables ---
 let allMovies = [];
 let filteredMovies = [];
@@ -10,6 +15,7 @@ async function initSite() {
     if (!grid) return;
 
     try {
+        // Fetching database
         const response = await fetch('./data.json');
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         
@@ -17,12 +23,13 @@ async function initSite() {
         allMovies = data;
         filteredMovies = data;
         
+        // Setup UI
         renderGallery();
-        setupSearch(); // <--- THIS WAS MISSING: It turns on the search bar
-        console.log("Database and Search loaded successfully!");
+        setupSearch(); 
+        console.log("MaestroTV: Database loaded and search active.");
 
     } catch (err) {
-        console.error("JSON Error:", err);
+        console.error("Critical Error:", err);
         grid.innerHTML = `<div style="color:white;text-align:center;padding:50px;grid-column:1/-1;">
             <h2 style="color:#e50914;">Database Error</h2>
             <p>${err.message}</p>
@@ -30,7 +37,7 @@ async function initSite() {
     }
 }
 
-// --- 3. Render Gallery ---
+// --- 3. Render Gallery Logic ---
 function renderGallery() {
     const grid = document.getElementById('movie-display');
     const prevBtn = document.getElementById('prevBtn');
@@ -38,34 +45,24 @@ function renderGallery() {
     const pageDisplay = document.getElementById('pageNumber');
     
     if (!grid) return;
-    grid.innerHTML = ''; // Clear the grid
+    grid.innerHTML = ''; 
 
-    // 1. Calculate pagination details
     const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
 
-    // 2. Update Pagination Text and Button States
-    if (pageDisplay) {
-        pageDisplay.innerText = `Page ${currentPage} of ${totalPages || 1}`;
-    }
-    if (prevBtn) {
-        prevBtn.disabled = (currentPage === 1);
-    }
-    if (nextBtn) {
-        nextBtn.disabled = (currentPage >= totalPages || totalPages === 0);
-    }
+    // Update Pagination UI
+    if (pageDisplay) pageDisplay.innerText = `Page ${currentPage} of ${totalPages || 1}`;
+    if (prevBtn) prevBtn.disabled = (currentPage === 1);
+    if (nextBtn) nextBtn.disabled = (currentPage >= totalPages || totalPages === 0);
 
-    // 3. Get the specific slice of movies for this page
     const start = (currentPage - 1) * moviesPerPage;
     const end = start + moviesPerPage;
     const currentItems = filteredMovies.slice(start, end);
 
-    // 4. Handle Empty Results (for search)
     if (currentItems.length === 0) {
         grid.innerHTML = `<p style="color:white; text-align:center; grid-column:1/-1; padding:50px;">No movies found.</p>`;
         return;
     }
 
-    // 5. DRAW THE CARDS (This is the part that was likely missing)
     currentItems.forEach(movie => {
         const genreText = movie.genre ? movie.genre : "General";
         const watchButton = (movie.stream_url && movie.stream_url.trim() !== "") 
@@ -89,26 +86,41 @@ function renderGallery() {
             </div>`;
     });
 }
-// --- 4. Search Logic (NEW) ---
+
+// --- 4. Search & Filter Functions ---
 function setupSearch() {
-    // Make sure your HTML input has id="searchInput" or change this selector
     const searchInput = document.getElementById('searchInput') || document.querySelector('input[type="text"]');
-    
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             const term = e.target.value.toLowerCase().trim();
-            
-            filteredMovies = allMovies.filter(movie => 
-                movie.title.toLowerCase().includes(term)
-            );
-            
+            filteredMovies = allMovies.filter(movie => movie.title.toLowerCase().includes(term));
             currentPage = 1; 
             renderGallery();
         });
     }
 }
 
-// --- 5. Global Handlers ---
+window.filterByGenre = function(genreName) {
+    if (genreName === 'All') {
+        filteredMovies = allMovies;
+    } else {
+        filteredMovies = allMovies.filter(movie => movie.genre && movie.genre.includes(genreName));
+    }
+    currentPage = 1;
+    renderGallery();
+};
+
+// --- 5. Pagination Control ---
+window.changePage = function(direction) {
+    const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
+    currentPage += direction;
+    if (currentPage < 1) currentPage = 1;
+    if (currentPage > totalPages) currentPage = totalPages;
+    renderGallery();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+};
+
+// --- 6. Adsterra & Modal Handlers ---
 window.handleDownload = function(url) {
     const adsterraLink = "https://www.effectivegatecpm.com/tgw846gbj?key=0d9de288386fc98fe8a13ae0823e76a4"; 
     window.open(adsterraLink, '_blank');
@@ -120,7 +132,8 @@ window.watchMovie = function(url) {
     const player = document.getElementById("videoPlayer");
     if(modal && player) {
         player.src = url;
-        modal.style.display = "flex";
+        modal.style.display = "flex"; 
+        document.body.style.overflow = "hidden"; // Freeze background
     }
 };
 
@@ -129,60 +142,15 @@ window.closeModal = function() {
     const player = document.getElementById("videoPlayer");
     if(modal && player) {
         modal.style.display = "none";
-        player.src = "";
+        player.src = ""; 
+        document.body.style.overflow = "auto"; // Unfreeze background
     }
+};
+
+// --- 7. Final Execution ---
+// This ensures the script only runs after the HTML is ready
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initSite);
+} else {
+    initSite();
 }
-
-window.filterByGenre = function(genreName) {
-    if (genreName === 'All') {
-        filteredMovies = allMovies;
-    } else {
-        filteredMovies = allMovies.filter(movie => 
-            movie.genre && movie.genre.includes(genreName)
-        );
-    }
-    currentPage = 1;
-    renderGallery();
-};
-
-// --- 6. Run ---
-initSite();
-window.watchMovie = function(url) {
-    const modal = document.getElementById("videoModal");
-    const player = document.getElementById("videoPlayer");
-    
-    if(modal && player) {
-        player.src = url;
-        modal.style.display = "flex"; // Show the "page"
-        
-        // Disable scrolling on the main site while watching
-        document.body.style.overflow = "hidden"; 
-    }
-};
-
-window.closeModal = function() {
-    const modal = document.getElementById("videoModal");
-    const player = document.getElementById("videoPlayer");
-    
-    if(modal && player) {
-        modal.style.display = "none";
-        player.src = ""; // Stop the movie
-        
-        // Re-enable scrolling
-        document.body.style.overflow = "auto"; 
-    }
-};
-window.changePage = function(direction) {
-    const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
-    
-    currentPage += direction;
-
-    // Safety checks
-    if (currentPage < 1) currentPage = 1;
-    if (currentPage > totalPages) currentPage = totalPages;
-
-    renderGallery();
-    
-    // Scroll back to top so user sees the new movies
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-};
