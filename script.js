@@ -38,28 +38,34 @@ function renderGallery() {
     const pageDisplay = document.getElementById('pageNumber');
     
     if (!grid) return;
-    grid.innerHTML = '';
+    grid.innerHTML = ''; // Clear the grid
 
-    // Calculate total pages
+    // 1. Calculate pagination details
     const totalPages = Math.ceil(filteredMovies.length / moviesPerPage);
 
-    // Update Pagination UI
-    if (pageDisplay) pageDisplay.innerText = `Page ${currentPage} of ${totalPages || 1}`;
-    if (prevBtn) prevBtn.disabled = (currentPage === 1);
-    if (nextBtn) nextBtn.disabled = (currentPage >= totalPages);
+    // 2. Update Pagination Text and Button States
+    if (pageDisplay) {
+        pageDisplay.innerText = `Page ${currentPage} of ${totalPages || 1}`;
+    }
+    if (prevBtn) {
+        prevBtn.disabled = (currentPage === 1);
+    }
+    if (nextBtn) {
+        nextBtn.disabled = (currentPage >= totalPages || totalPages === 0);
+    }
 
+    // 3. Get the specific slice of movies for this page
     const start = (currentPage - 1) * moviesPerPage;
     const end = start + moviesPerPage;
     const currentItems = filteredMovies.slice(start, end);
 
-    // ... (rest of your existing forEach loop code goes here)
-}
-
+    // 4. Handle Empty Results (for search)
     if (currentItems.length === 0) {
-        grid.innerHTML = `<p style="color:white; text-align:center; grid-column:1/-1; padding:50px;">No movies found matches your search.</p>`;
+        grid.innerHTML = `<p style="color:white; text-align:center; grid-column:1/-1; padding:50px;">No movies found.</p>`;
         return;
     }
 
+    // 5. DRAW THE CARDS (This is the part that was likely missing)
     currentItems.forEach(movie => {
         const genreText = movie.genre ? movie.genre : "General";
         const watchButton = (movie.stream_url && movie.stream_url.trim() !== "") 
@@ -83,7 +89,6 @@ function renderGallery() {
             </div>`;
     });
 }
-
 // --- 4. Search Logic (NEW) ---
 function setupSearch() {
     // Make sure your HTML input has id="searchInput" or change this selector
