@@ -127,3 +127,28 @@ window.filterByGenre = function(genreName) {
 
 // --- 6. Run ---
 initSite();
+window.watchMovie = function(url) {
+    const modal = document.getElementById("videoModal");
+    const player = document.getElementById("videoPlayer");
+    
+    if(modal && player) {
+        player.src = url;
+        modal.style.display = "flex"; // Show the "page"
+        
+        // Disable scrolling on the main site while watching
+        document.body.style.overflow = "hidden"; 
+    }
+};
+
+window.closeModal = function() {
+    const modal = document.getElementById("videoModal");
+    const player = document.getElementById("videoPlayer");
+    
+    if(modal && player) {
+        modal.style.display = "none";
+        player.src = ""; // Stop the movie
+        
+        // Re-enable scrolling
+        document.body.style.overflow = "auto"; 
+    }
+};
