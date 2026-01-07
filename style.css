@@ -554,3 +554,45 @@ footer {
 #searchInput::placeholder {
     color: #777;
 }
+/* The Watch Page (Modal) */
+#videoModal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 9999; /* Sit on top of everything */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95); /* Deep black background */
+    justify-content: center;
+    align-items: center;
+}
+
+/* The Video Player Container */
+.modal-content {
+    width: 90%;
+    max-width: 1000px;
+    background: #000;
+    position: relative;
+    border: 2px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(229, 9, 20, 0.5); /* Red glow like Netflix */
+}
+
+/* Close Button */
+.close-watch {
+    position: absolute;
+    top: -45px;
+    right: 0;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Make iframe responsive */
+#videoPlayer {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+}
